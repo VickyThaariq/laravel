@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
-class UserController extends Controllers{
+use Illuminate\Http\Request;
 
-    public function login( Request $request ){
-        $username=$request->post ('username');
-        $password=$request->post ('password');
+class UserController extends Controller{
+    public function login(Request $request){
+        $username=$request->post('username');
+        $password=$request->post('password');
 
-        if ($username) != 'admin'
+        // var_dump($username);
+        // var_dump($password);
+        // die;
+
+        if($username !== 'admin' && $password !== 'password'){
+            return \response()->redirectTo('/');
+        }else{
+            return \response()->redirectTo('/home');
+        }
     }
 }
